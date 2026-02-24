@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apenas um Jogo</title>
+    <link rel="icon" href="src/icons/favicon.svg" sizes="any" type="image/svg">
+    <link rel="stylesheet" href="src/styles/style.css">
+</head>
+
+<body>
+    <div class="window" id="mode-selection">
+        <h1>Escolha o Modo de Jogo</h1>
+        <button onclick="selectMode('single')">Jogar Sozinho</button>
+        <button onclick="selectMode('multi')">Jogar Multiplayer</button>
+    </div>
+
+    <div class="window" id="connection-selection" style="display: none;">
+        <h1>Selecione a Conexão</h1>
+        <button onclick="selectConnection('local')">Conexão Local</button>
+        <button onclick="alert('Modo ainda não disponível!')">Internet</button>
+    </div>
+
+    <div class="window" id="name-selection-single" style="display: none;">
+        <h1>Digite Seu Nome</h1>
+        <input type="text" id="player-name" placeholder="Your name here">
+
+        <h1>Escolha Os Controles:</h1>
+        <label>
+            <input type="radio" name="control-scheme" value="wasd" checked> WASD
+        </label>
+        <label>
+            <input type="radio" name="control-scheme" value="arrows"> Setas direcionais
+        </label>
+        <br>
+        <br>
+        <button onclick="startGameSingle()">Jugar</button>
+    </div>
+
+    <div class="window" id="name-selection-multi" style="display: none;">
+        <h1>Digite Os Nomes Dos Jogadores</h1>
+        <input type="text" id="player1-name" placeholder="Player 1 name">
+        <input type="text" id="player2-name" placeholder="Player 2 name">
+        <button onclick="startGameMulti()">Jugar</button>
+    </div>
+
+    <div id="game-screen">
+        <div id="player1" class="player">😐</div>
+        <div id="player2" class="player" style="display: none;">🐵</div>
+
+        <div class="stats-container player1">
+            <h2 class="name" id="display-name1"></h2>
+            <ul class="stats">
+                <li>Agilidade: 0</li>
+                <li>Força: 0</li>
+                <li>Resistência: 1/1</li>
+                <li>Inteligência: 0</li>
+                <li>Mana: 0</li>
+            </ul>
+        </div>
+
+        <div class="stats-container player2" style="display: none;">
+            <h2 class="name" id="display-name2"></h2>
+            <ul class="stats">
+                <li>Agilidade: 0</li>
+                <li>Força: 0</li>
+                <li>Resistência: 1/1</li>
+                <li>Inteligência: 0</li>
+                <li>Mana: 0</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="src/scripts/script.js"></script>
+</body>
+
+</html>
