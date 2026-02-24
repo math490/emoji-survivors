@@ -21,7 +21,18 @@ function selectConnection(connection) {
   }
 }
 
+function goBack() {
+  // Esconde todas as janelas intermediárias
+  document.getElementById("name-selection-single").style.display = "none";
+  document.getElementById("name-selection-multi").style.display = "none";
+  document.getElementById("connection-selection").style.display = "none";
+
+  // Volta para a tela inicial
+  document.getElementById("mode-selection").style.display = "block";
+}
+
 function startGameSingle() {
+  stopEmojiRain();
   const playerName = document.getElementById("player-name").value;
   singlePlayerControls = document.querySelector(
     'input[name="control-scheme"]:checked'
@@ -48,6 +59,7 @@ function startGameSingle() {
 }
 
 function startGameMulti() {
+  stopEmojiRain();
   const player1Name = document.getElementById("player1-name").value;
   const player2Name = document.getElementById("player2-name").value;
 
@@ -62,9 +74,6 @@ function startGameMulti() {
   document.getElementById("display-name2").textContent = player2Name;
   document.getElementById("player2").style.display = "block";
   document.querySelector(".stats-container.player2").style.display = "block";
-
-  const player1 = document.getElementById("player1");
-  const player2 = document.getElementById("player2");
 
   const nameTag1 = createPlayerNameTag("player1", player1Name);
   const nameTag2 = createPlayerNameTag("player2", player2Name);
@@ -362,3 +371,64 @@ function updatePlayerStats(playerId, stats, playerName, playerClass) {
         `;
   }
 }
+
+// Emojis da chuva
+const rainEmojis = [
+"😛","😁","😊","😂","🤣","😍","😒","😘","😉","😎",
+"🐱‍👤","😆","😃","🤢","🤔","🤡","🤠","😈","👽",
+"👻","☠","🧐","🤧","😇","🥳","🥶","🤑"
+];
+
+let rainInterval = null;
+
+// Criar container da chuva
+function createRainContainer() {
+    const container = document.createElement("div");
+    container.id = "emoji-rain";
+    document.body.appendChild(container);
+}
+
+// Criar emoji caindo
+function spawnRainEmoji() {
+    const container = document.getElementById("emoji-rain");
+    if (!container) return;
+
+    const emoji = document.createElement("div");
+    emoji.classList.add("rain-emoji");
+
+    emoji.innerText = rainEmojis[Math.floor(Math.random() * rainEmojis.length)];
+
+    // posição inicial
+    emoji.style.left = Math.random() * window.innerWidth + "px";
+
+    // duração aleatória (mais variedade)
+    emoji.style.animationDuration = (2 + Math.random() * 2.5) + "s";
+
+    // vento lateral aleatório
+    const wind = (Math.random() - 0.5) * 200; 
+    emoji.style.setProperty("--wind", wind + "px");
+
+    container.appendChild(emoji);
+
+    setTimeout(() => {
+        emoji.remove();
+    }, 4500);
+}
+
+// Iniciar chuva
+function startEmojiRain() {
+    createRainContainer();
+    rainInterval = setInterval(spawnRainEmoji, 120);
+}
+
+// Parar chuva
+function stopEmojiRain() {
+    clearInterval(rainInterval);
+    const container = document.getElementById("emoji-rain");
+    if (container) container.remove();
+}
+
+// Inicia automaticamente ao carregar página
+document.addEventListener("DOMContentLoaded", () => {
+    startEmojiRain();
+});

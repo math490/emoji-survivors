@@ -17,12 +17,18 @@
     </div>
 
     <div class="window" id="connection-selection" style="display: none;">
+        <div class="back">
+            <button class="back-button" onclick="goBack()">← Voltar</button>
+        </div>
         <h1>Selecione a Conexão</h1>
         <button onclick="selectConnection('local')">Conexão Local</button>
         <button onclick="alert('Modo ainda não disponível!')">Internet</button>
     </div>
 
     <div class="window" id="name-selection-single" style="display: none;">
+        <div class="back">
+            <button class="back-button" onclick="goBack()">← Voltar</button>
+        </div>
         <h1>Digite Seu Nome</h1>
         <input type="text" id="player-name" placeholder="Your name here">
 
@@ -31,7 +37,7 @@
             <input type="radio" name="control-scheme" value="wasd" checked> WASD
         </label>
         <label>
-            <input type="radio" name="control-scheme" value="arrows"> Setas direcionais
+            <input type="radio" name="control-scheme" value="arrows"> Setas Direcionais
         </label>
         <br>
         <br>
@@ -39,6 +45,9 @@
     </div>
 
     <div class="window" id="name-selection-multi" style="display: none;">
+        <div class="back">
+            <button class="back-button" onclick="goBack()">← Voltar</button>
+        </div>
         <h1>Digite Os Nomes Dos Jogadores</h1>
         <input type="text" id="player1-name" placeholder="Player 1 name">
         <input type="text" id="player2-name" placeholder="Player 2 name">
